@@ -1,6 +1,11 @@
 ﻿cmake_minimum_required(VERSION 3.8)
 project(OpcodeToBytes)
 
+# Ensure the project is built only on Windows
+if (NOT WIN32)
+    message(FATAL_ERROR "This project can only be built on Windows.")
+endif()
+
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
