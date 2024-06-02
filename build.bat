@@ -28,7 +28,7 @@ color 2
 for %%I in (.) do set "CURRENT_DIR=%%~fI"
 
 :: Define the source and destination paths for the DLL
-set "DLL_SOURCE=C:\Users\admin\source\repos\OpcodeToBytes\dependencies\keystone\bin\keystone.dll"
+set "DLL_SOURCE=%CURRENT_DIR%\..\dependencies\keystone\bin\keystone.dll"
 set "DLL_DEST=%CURRENT_DIR%\Release"
 
 :: Check if DLL_SOURCE exists, and if not, exit with error
