@@ -3,15 +3,21 @@
 
 int main()
 {
-    Assembler assembler;
     std::string opcodeInput;
 
     std::puts("Enter your opcode");
     std::getline(std::cin >> std::ws, opcodeInput);
     std::cout << '\n';
 
-    assembler.printBytes(opcodeInput);
-
+    try
+    {
+        Assembler assembler;
+        assembler.printBytes(opcodeInput);
+    }
+    catch(std::exception& ex) {
+        std::puts(ex.what());
+    }
+    
     std::cin.get();
     return 0;
 }
