@@ -8,19 +8,22 @@
 class Assembler
 {
 public:
-	Assembler();
+    Assembler();
     ~Assembler() noexcept;
 
-    void printBytes(const std::string& assemblyCode) noexcept;
+    void printBytes();
+    void getUsersOpcode();
 
 private:
-    std::vector<unsigned char> assemble(const std::string& assemblyCode);
-
+    std::vector<unsigned char> assemble();
+    bool isValidOpcode() const noexcept;
 private:
     unsigned char* m_encode{ nullptr };
     ks_engine* m_ks;
     ks_arch m_arch;
     ks_mode m_mode;
+
+    std::string m_opcode;
 };
 
 #endif // ASSEMBLER_HPP

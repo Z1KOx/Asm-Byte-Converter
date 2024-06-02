@@ -3,16 +3,11 @@
 
 int main()
 {
-    std::string opcodeInput;
-
-    std::puts("Enter your opcode");
-    std::getline(std::cin >> std::ws, opcodeInput);
-    std::cout << '\n';
-
     try
     {
         Assembler assembler;
-        assembler.printBytes(opcodeInput);
+        assembler.getUsersOpcode();
+        assembler.printBytes();
     }
     catch(std::exception& ex) {
         std::puts(ex.what());

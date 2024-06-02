@@ -17,12 +17,45 @@ Assembler::~Assembler() noexcept
         ks_free(m_encode);
 }
 
-std::vector<unsigned char> Assembler::assemble(const std::string& assemblyCode)
+void Assembler::printBytes()
+{
+    try {
+        const std::vector<unsigned char> bytes = assemble();
+        if (!bytes.empty())
+        {
+            std::cout << "Bytes: ";
+            for (const auto& byte : bytes) {
+                std::cout << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
+            }
+            std::cout << std::dec << std::nouppercase << '\n';
+        }
+        else
+            throw std::runtime_error("Failed to assemble the given opcode or no bytes generated.");
+    }
+    catch (const std::exception& ex) {
+        std::cerr << ex.what() << '\n';
+    }
+}
+
+void Assembler::getUsersOpcode()
+{
+    std::puts("Enter your opcode");
+    std::getline(std::cin >> std::ws, m_opcode);
+    std::cout << '\n';
+
+    if (m_opcode.empty())
+        throw std::runtime_error("No opcode entered!\n");
+
+    if (!isValidOpcode())
+        throw std::runtime_error("Invalid opcode entered!\n");
+}
+
+std::vector<unsigned char> Assembler::assemble()
 {
     std::vector<unsigned char> bytes;
 
     size_t size, count;
-	const auto err = static_cast<ks_err>(ks_asm(m_ks, assemblyCode.c_str(), 0, &m_encode, &size, &count));
+	const auto err = static_cast<ks_err>(ks_asm(m_ks, m_opcode.c_str(), 0, &m_encode, &size, &count));
 	if (err != KS_ERR_OK)
         throw std::runtime_error("Failed to assemble");
 
@@ -31,18 +64,22 @@ std::vector<unsigned char> Assembler::assemble(const std::string& assemblyCode)
     return bytes;
 }
 
-void Assembler::printBytes(const std::string& assemblyCode) noexcept
+bool Assembler::isValidOpcode() const noexcept
 {
-    const std::vector<unsigned char> bytes = assemble(assemblyCode);
-    if (!bytes.empty())
-    {
-        std::cout << "Bytes: ";
-        for (const auto& byte : bytes) {
-	        std::cout << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
-        }
+    ks_engine* ks;
 
-        std::cout << std::dec << std::nouppercase << '\n';
-    }
-    else
-        std::puts("Failed to assemble the given opcode or no bytes generated.");
+    if (ks_open(KS_ARCH_X86, KS_MODE_32, &ks) != KS_ERR_OK)
+        return false;
+
+    size_t size, count;
+    unsigned char* encode;
+    const int err = ks_asm(ks, m_opcode.c_str(), 0, &encode, &size, &count);
+
+    ks_close(ks);
+
+    if (err != KS_ERR_OK)
+        return false;
+
+    ks_free(encode);
+    return true;
 }
