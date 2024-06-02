@@ -3,7 +3,7 @@
 # How does this work?
 
 ### 1. Write your opcode:
-Open the exe file and input your assembly code. For example:
+Open the executable file and input your assembly code. For example:
 ```bash
 Enter your opcode
 inc dword ptr ds:[esi]
