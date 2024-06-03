@@ -12,8 +12,9 @@ inc dword ptr ds:[esi]
 ### 2. Display result
 The project will then display the bytes of your entered assembly code. For example:
 ```bash
-Opcode inc dword ptr ds:[esi]
-Bytes  FF 06
+Opcode   inc dword ptr ds:[esi]
+Bytes    FF 06
+Binaries 11111111 00000110
 ```
 
 ## To clone this project with Git
