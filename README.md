@@ -28,5 +28,5 @@ Opcode [ inc dword ptr ds:[esi] ]
 # Getting Started
 Clone this project using Git
 ```bash
-git clone https://github.com/Z1KOx/OpcodeToBytes.git
+git clone https://github.com/Z1KOx/Asm-Byte-Converter.git
 ```
