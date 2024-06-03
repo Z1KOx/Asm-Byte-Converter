@@ -13,7 +13,7 @@ public:
     ~Assembler() noexcept;
 
     void getUserOpcode();
-    void print();
+    void print() const;
 
     // Deleted copy constructor, copy assignment operator, move constructor, and move assignment operator
     Assembler(const Assembler& other) = delete;
