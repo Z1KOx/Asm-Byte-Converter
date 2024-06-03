@@ -7,13 +7,13 @@ int main()
     try
     {
         Assembler assembler;
-        assembler.getUsersOpcode();
-        assembler.printBytes();
+        assembler.getUserOpcode();
+        assembler.print();
     }
-    catch(std::exception& ex) {
-        std::puts(ex.what());
+    catch (const std::exception& ex) {
+        std::cerr << ex.what() << '\n';
     }
-    
+
     std::cin.get();
     return 0;
 }
