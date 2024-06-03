@@ -1,3 +1,5 @@
+#include <bitset>
+
 #include "include/Assembler.hpp"
 
 #include <iostream>
@@ -20,25 +22,22 @@ Assembler::~Assembler() noexcept
 
 void Assembler::printBytes()
 {
-	std::cout << "Opcode " << m_opcode << '\n';
+	std::cout << "Opcode   " << m_opcode << '\n';
 
-	try
+	const std::vector<unsigned char> bytes = assemble();
+	if (!bytes.empty())
 	{
-		const std::vector<unsigned char> bytes = assemble();
-		if (!bytes.empty())
-		{
-			std::cout << "Bytes  ";
-			for (const auto& byte : bytes) {
-				std::cout << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << " ";
-			}
-			std::cout << std::dec << std::nouppercase << '\n';
+		std::cout << "Bytes    ";
+		for (const auto& byte : bytes) {
+			std::cout << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << ' ';
 		}
-		else
-			throw std::runtime_error("Failed to assemble the given opcode or no bytes generated.");
+
+		printBinaries(bytes);
+
+		std::cout << std::dec << std::nouppercase << '\n';
 	}
-	catch (const std::exception& ex) {
-		std::cerr << ex.what() << '\n';
-	}
+	else
+		throw std::runtime_error("Failed to assemble the given opcode or no bytes generated.");
 }
 
 void Assembler::getUsersOpcode()
@@ -59,6 +58,14 @@ void Assembler::getUsersOpcode()
 	}
 
 	system("cls");
+}
+
+void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noexcept
+{
+	std::cout << "\nBinaries ";
+	for (const auto& byte : bytes) {
+		std::cout << std::bitset<8>(byte) << ' ';
+	}
 }
 
 [[nodiscard]] std::vector<unsigned char> Assembler::assemble()

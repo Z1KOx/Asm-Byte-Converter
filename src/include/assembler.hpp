@@ -16,6 +16,7 @@ public:
     void getUsersOpcode();
 
 private:
+    void printBinaries(const std::vector<unsigned char>& bytes) const noexcept;
     [[nodiscard]] std::vector<unsigned char> assemble();
     [[nodiscard]] bool isValidOpcode() const noexcept;
 private:
