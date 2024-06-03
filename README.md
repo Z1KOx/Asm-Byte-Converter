@@ -3,7 +3,7 @@
 > - This project has only been tested on the Windows operating system.
 
 # Overview
-Run the executable and input your assembly code. For example.
+Run the executable and input your assembly code. For example:
 
 # How does this work?
 
@@ -15,7 +15,7 @@ Enter your opcode
 ```
 
 ### 2. Display result
-The project will then display the bytes of your entered assembly code. For example:
+The executable will then display the bytes of your entered assembly code. For example:
 ```bash
 Opcode [ inc dword ptr ds:[esi] ]
 |
