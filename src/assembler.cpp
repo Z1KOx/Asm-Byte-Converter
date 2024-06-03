@@ -47,7 +47,7 @@ void Assembler::getUserOpcode()
 // Prints the opcode, its bytes, and their binary representation
 void Assembler::print()
 {
-	std::cout << "Opcode:   " << m_opcode << '\n';
+	std::cout << "Opcode    " << m_opcode << '\n';
 
 	const std::vector<unsigned char> bytes = assemble();
 	if (!bytes.empty()) 
@@ -67,7 +67,7 @@ void Assembler::print()
 // Prints the bytes in hexadecimal format
 void Assembler::printBytes(const std::vector<unsigned char>& bytes) const noexcept
 {
-	std::cout << "Bytes:    ";
+	std::cout << "Bytes     ";
 	for (const auto& byte : bytes) {
 		std::cout << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << static_cast<int>(byte) << ' ';
 	}
@@ -76,11 +76,20 @@ void Assembler::printBytes(const std::vector<unsigned char>& bytes) const noexce
 // Prints the bytes in binary format
 void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noexcept
 {
-	std::cout << "Binaries: ";
+	std::cout << "Binaries  ";
+	int count = 0;
 	for (const auto& byte : bytes) {
-		std::cout << std::bitset<8>(byte) << ' ';
+		std::bitset<8> bits(byte);
+		for (int i = 7; i >= 0; --i) {
+			std::cout << bits[i];
+			count++;
+			if (count % 4 == 0) {
+				std::cout << ' ';
+			}
+		}
 	}
 }
+
 
 // Assembles the opcode into bytes using the Keystone engine
 [[nodiscard]] std::vector<unsigned char> Assembler::assemble() const
