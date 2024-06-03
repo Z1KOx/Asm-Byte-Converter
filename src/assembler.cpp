@@ -65,7 +65,7 @@ void Assembler::print() const noexcept
 }
 
 // Handles the user's choice to input another opcode or exit the program
-bool Assembler::handleUserChoice() const noexcept
+[[nodiscard]] bool Assembler::handleUserChoice() const noexcept
 {
 	auto input{0};
 	std::puts("\n1] To input another opcode\n2] To exit the program");
