@@ -30,4 +30,4 @@ Clone this project using Git
 ```bash
 git clone https://github.com/Z1KOx/Asm-Byte-Converter.git
 ```
-- If you don't have Git installed, you can download it <a href="https://git-scm.com/downloads" target="_blank">here</a>.
+- If you don't have Git installed, you can download it <a href="https://git-scm.com/downloads">here</a>
