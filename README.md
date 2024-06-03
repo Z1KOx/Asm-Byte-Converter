@@ -3,7 +3,7 @@
 > - This project has only been tested on the Windows operating system.
 
 # Overview
-Run the executable and input your assembly code. For example:
+Run the executable and input your assembly code.
 
 # How does this work?
 
