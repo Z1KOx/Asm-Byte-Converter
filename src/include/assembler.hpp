@@ -14,7 +14,7 @@ public:
 
     void getUserOpcode() noexcept;
     void print() const noexcept;
-    bool handleUserChoice() const noexcept;
+    [[nodiscard]] bool handleUserChoice() const noexcept;
 
     // Deleted copy constructor, copy assignment operator, move constructor, and move assignment operator
     Assembler(const Assembler& other) = delete;
