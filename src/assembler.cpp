@@ -47,13 +47,14 @@ void Assembler::getUserOpcode()
 // Prints the opcode, its bytes, and their binary representation
 void Assembler::print() const
 {
-	std::cout << "Opcode    [ " << m_opcode << " ]\n";
+	std::cout << "Opcode [ " << m_opcode << " ]\n"
+		      << "|\n"
+		      << "+------> ";
 
 	const std::vector<unsigned char> bytes = assemble();
 	if (!bytes.empty()) 
 	{
 		printBytes(bytes);
-		std::cout << '\n';
 		printBinaries(bytes);
 
 		std::cout << '\n';
@@ -67,9 +68,8 @@ void Assembler::print() const
 // Prints the bytes in hexadecimal format
 void Assembler::printBytes(const std::vector<unsigned char>& bytes) const noexcept
 {
-	std::cout << "Bytes     ";
+	std::cout << "Bytes [ ";
 
-	std::cout << "[ ";
 	for (const auto& byte : bytes)
 	{
 		std::cout << std::hex << std::uppercase << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
@@ -77,14 +77,16 @@ void Assembler::printBytes(const std::vector<unsigned char>& bytes) const noexce
 			std::cout << ' ';
 		}
 	}
-	std::cout << " ]";
+	std::cout << " ]\n"
+	          << "         |\n"
+		      << "         +-----> ";
 }
 
 
 // Prints the bytes in binary format
 void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noexcept
 {
-	std::cout << "Binaries  [ ";
+	std::cout << "Binaries [ ";
 	auto count{ 0 };
 	for (const auto& byte : bytes) 
 	{
@@ -101,11 +103,12 @@ void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noe
 	std::cout << "]\n";
 
 	// Hex byte print
-	std::cout << "            ";
+	std::cout << "                          [ ";
 	for (const auto& byte : bytes) {
 		std::cout << std::hex << std::uppercase << std::setw(1) << std::setfill(' ') << static_cast<int>(byte) / 16 << "    ";
 		std::cout << std::hex << std::uppercase << std::setw(1) << std::setfill(' ') << static_cast<int>(byte) % 16 << "    ";
 	}
+	std::cout << ']';
 }
 
 
