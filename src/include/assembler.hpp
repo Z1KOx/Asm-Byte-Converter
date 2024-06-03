@@ -2,6 +2,7 @@
 #define ASSEMBLER_HPP
 
 #include <keystone.h>
+
 #include <string>
 #include <vector>
 
@@ -15,8 +16,8 @@ public:
     void getUsersOpcode();
 
 private:
-    std::vector<unsigned char> assemble();
-    bool isValidOpcode() const noexcept;
+    [[nodiscard]] std::vector<unsigned char> assemble();
+    [[nodiscard]] bool isValidOpcode() const noexcept;
 private:
     unsigned char* m_encode{ nullptr };
     ks_engine* m_ks;
