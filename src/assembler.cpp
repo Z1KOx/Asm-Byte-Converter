@@ -5,10 +5,11 @@
 #include <bitset>
 
 // Constructor: Initializes the Keystone engine with x86 architecture
-Assembler::Assembler()
+Assembler::Assembler() noexcept
 {
 	if (ks_open(m_arch, m_mode, &m_ks) != KS_ERR_OK) {
-		throw std::runtime_error("Failed to initialize keystone");
+		std::cerr << "Failed to initialize keystone";
+		return;
 	}
 }
 
@@ -18,15 +19,13 @@ Assembler::~Assembler() noexcept
 	if (m_ks) {
 		ks_close(m_ks);
 	}
-	if (m_encode) {
-		ks_free(m_encode);
-	}
 }
 
 // Prompts the user to enter an opcode and validates it
-void Assembler::getUserOpcode()
+void Assembler::getUserOpcode() noexcept
 {
 	std::puts("Enter your opcode");
+	std::cout << ">  ";
 
 	while (true)
 	{
@@ -35,6 +34,7 @@ void Assembler::getUserOpcode()
 		if (!isValidOpcode())
 		{
 			std::puts("Invalid opcode entered");
+			std::cout << ">  ";
 			continue;
 		}
 
@@ -45,14 +45,14 @@ void Assembler::getUserOpcode()
 }
 
 // Prints the opcode, its bytes, and their binary representation
-void Assembler::print() const
+void Assembler::print() const noexcept
 {
 	std::cout << "Opcode [ " << m_opcode << " ]\n"
-		      << "|\n"
-		      << "+------> ";
+		<< "|\n"
+		<< "+------> ";
 
 	const std::vector<unsigned char> bytes = assemble();
-	if (!bytes.empty()) 
+	if (!bytes.empty())
 	{
 		printBytes(bytes);
 		printBinaries(bytes);
@@ -60,10 +60,34 @@ void Assembler::print() const
 		std::cout << '\n';
 	}
 	else {
-		throw std::runtime_error("Failed to assemble the given opcode or no bytes generated.");
+		std::cerr << "Failed to assemble the given opcode or no bytes generated.";
 	}
 }
 
+// Handles the user's choice to input another opcode or exit the program
+bool Assembler::handleUserChoice() const noexcept
+{
+	auto input{0};
+	std::puts("\n1] To input another opcode\n2] To exit the program");
+	std::cout << ">  ";
+
+	while (true)
+	{
+		std::cin >> input;
+
+		switch(input)
+		{
+		case 1: return false;
+		case 2: return true;
+		default:
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+			std::puts("Invalid input");
+			std::cout << ">  ";
+		}
+	}
+}
 
 // Prints the bytes in hexadecimal format
 void Assembler::printBytes(const std::vector<unsigned char>& bytes) const noexcept
@@ -78,8 +102,8 @@ void Assembler::printBytes(const std::vector<unsigned char>& bytes) const noexce
 		}
 	}
 	std::cout << " ]\n"
-	          << "         |\n"
-		      << "         +-----> ";
+		<< "         |\n"
+		<< "         +-----> ";
 }
 
 
@@ -88,7 +112,7 @@ void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noe
 {
 	std::cout << "Binaries [ ";
 	auto count{ 0 };
-	for (const auto& byte : bytes) 
+	for (const auto& byte : bytes)
 	{
 		std::bitset<8> bits(byte);
 		for (int i = 7; i >= 0; --i)
@@ -113,7 +137,7 @@ void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noe
 
 
 // Assembles the opcode into bytes using the Keystone engine
-[[nodiscard]] std::vector<unsigned char> Assembler::assemble() const
+[[nodiscard]] std::vector<unsigned char> Assembler::assemble() const noexcept
 {
 	std::vector<unsigned char> bytes;
 
@@ -121,7 +145,8 @@ void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noe
 	unsigned char* encode{ nullptr };
 	const auto err = static_cast<ks_err>(ks_asm(m_ks, m_opcode.c_str(), 0, &encode, &size, &count));
 	if (err != KS_ERR_OK) {
-		throw std::runtime_error("Failed to assemble");
+		std::cerr << "Failed to assemble";
+		return bytes;
 	}
 
 	bytes.assign(encode, encode + size);

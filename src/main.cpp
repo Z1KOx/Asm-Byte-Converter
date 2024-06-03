@@ -4,16 +4,18 @@
 
 int main()
 {
-    try
+    auto endLoop{ false };
+
+    while (!endLoop)
     {
         Assembler assembler;
         assembler.getUserOpcode();
         assembler.print();
-    }
-    catch (const std::exception& ex) {
-        std::cerr << ex.what() << '\n';
+        endLoop = assembler.handleUserChoice();
+
+        system("cls");
     }
 
-    std::cin.get();
-    return 0;
+	std::cin.get();
+	return 0;
 }

@@ -9,11 +9,12 @@
 class Assembler
 {
 public:
-    Assembler();
+    Assembler() noexcept;
     ~Assembler() noexcept;
 
-    void getUserOpcode();
-    void print() const;
+    void getUserOpcode() noexcept;
+    void print() const noexcept;
+    bool handleUserChoice() const noexcept;
 
     // Deleted copy constructor, copy assignment operator, move constructor, and move assignment operator
     Assembler(const Assembler& other) = delete;
@@ -25,10 +26,9 @@ private:
     void printBytes(const std::vector<unsigned char>& bytes) const noexcept;
     void printBinaries(const std::vector<unsigned char>& bytes) const noexcept;
 
-    [[nodiscard]] std::vector<unsigned char> assemble() const; // Assembles the opcode into bytes
-    [[nodiscard]] bool isValidOpcode() const noexcept;         // Checks if the opcode input is valid
+    [[nodiscard]] std::vector<unsigned char> assemble() const noexcept; // Assembles the opcode into bytes
+    [[nodiscard]] bool isValidOpcode() const noexcept;                  // Checks if the opcode input is valid
 private:
-    unsigned char* m_encode{ nullptr }; // Pointer to the encoded bytes
     ks_engine* m_ks{ nullptr };
     ks_arch m_arch{ KS_ARCH_X86 };
     ks_mode m_mode{ KS_MODE_32 };

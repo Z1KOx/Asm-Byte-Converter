@@ -6,7 +6,7 @@
 Open the executable file and input your assembly code. For example:
 ```bash
 Enter your opcode
-inc dword ptr ds:[esi]
+>  inc dword ptr ds:[esi]
 ```
 
 ### 2. Display result
