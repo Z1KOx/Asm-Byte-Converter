@@ -1,5 +1,5 @@
 ﻿cmake_minimum_required(VERSION 3.8)
-project(OpcodeToBytes)
+project(Asm-Byte-Converter)
 
 # Ensure the project is built only on Windows
 if (NOT WIN32)
@@ -18,10 +18,10 @@ set(SOURCES
 )
 
 # Add source to this project's executable.
-add_executable(OpcodeToBytes ${SOURCES})
+add_executable(Asm-Byte-Converter ${SOURCES})
 
 # Add include directories
-target_include_directories(OpcodeToBytes PRIVATE "${CMAKE_SOURCE_DIR}/dependencies/keystone/include")
+target_include_directories(Asm-Byte-Converter PRIVATE "${CMAKE_SOURCE_DIR}/dependencies/keystone/include")
 
 # Set the library directory
 set(KESTONE_LIB_DIR "${CMAKE_SOURCE_DIR}/dependencies/keystone/lib")
@@ -32,7 +32,7 @@ if(NOT EXISTS "${KESTONE_LIB_DIR}/keystone.lib")
 endif()
 
 # Add the library directory
-target_link_directories(OpcodeToBytes PRIVATE "${KESTONE_LIB_DIR}")
+target_link_directories(Asm-Byte-Converter PRIVATE "${KESTONE_LIB_DIR}")
 
 # Link the keystone library
-target_link_libraries(OpcodeToBytes PRIVATE keystone)
+target_link_libraries(Asm-Byte-Converter PRIVATE keystone)
