@@ -1,4 +1,8 @@
-### This project allows you to input your assembly code (opcode) directly into the console.
+> [!NOTE] 
+> While this implementation has been thoroughly tested with x86 assembly, compatibility with x64 assembly may not be guaranteed.
+
+# Overview
+Run the executable and input your assembly code. For example.
 
 # How does this work?
 
@@ -20,7 +24,8 @@ Opcode [ inc dword ptr ds:[esi] ]
                           [ F    F    0    6    ]
 ```
 
-## To clone this project with Git
+### Getting Started
+Clone this project using Git
 ```bash
 git clone https://github.com/Z1KOx/OpcodeToBytes.git
 ```
