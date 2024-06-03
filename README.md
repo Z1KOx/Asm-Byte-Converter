@@ -24,7 +24,7 @@ Opcode [ inc dword ptr ds:[esi] ]
                           [ F    F    0    6    ]
 ```
 
-### Getting Started
+# Getting Started
 Clone this project using Git
 ```bash
 git clone https://github.com/Z1KOx/OpcodeToBytes.git
