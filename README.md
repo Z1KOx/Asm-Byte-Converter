@@ -10,14 +10,14 @@ Convert your opcode into bytes and binary format.
 
 ### 1. Write your opcode
 Open the executable file and input your assembly code. For example:
-```bash
+```
 Enter your opcode
 >  inc dword ptr ds:[esi]
 ```
 
 ### 2. Display result
 The executable will then display the bytes of your entered assembly code. For example:
-```bash
+```
 Opcode [ inc dword ptr ds:[esi] ]
 |
 +------> Bytes [ FF 06 ]
