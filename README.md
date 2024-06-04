@@ -1,5 +1,5 @@
 > [!NOTE] 
-> - While this implementation has been thoroughly tested with x86 assembly, compatibility with x64 assembly may not be guaranteed.
+> - It only works in x86 assembly.
 > - This project has only been tested on the Windows operating system.
 
 # Overview
