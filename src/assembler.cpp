@@ -51,7 +51,7 @@ void Assembler::print() const noexcept
 		<< "|\n"
 		<< "+------> ";
 
-	const std::vector<unsigned char> bytes = assemble();
+	const auto bytes = assemble();
 	if (!bytes.empty())
 	{
 		printBytes(bytes);
@@ -67,7 +67,7 @@ void Assembler::print() const noexcept
 // Handles the user's choice to input another opcode or exit the program
 [[nodiscard]] bool Assembler::handleUserChoice() const noexcept
 {
-	auto input{0};
+	auto input{ 0 };
 	std::puts("\n1] To input another opcode\n2] To exit the program");
 	std::cout << ">  ";
 
@@ -75,7 +75,7 @@ void Assembler::print() const noexcept
 	{
 		std::cin >> input;
 
-		switch(input)
+		switch (input)
 		{
 		case 1: return false;
 		case 2: return true;
@@ -115,7 +115,7 @@ void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noe
 	for (const auto& byte : bytes)
 	{
 		std::bitset<8> bits(byte);
-		for (int i = 7; i >= 0; --i)
+		for (auto i{ 7 }; i >= 0; --i)
 		{
 			std::cout << bits[i];
 			count++;
@@ -165,7 +165,7 @@ void Assembler::printBinaries(const std::vector<unsigned char>& bytes) const noe
 
 	size_t size, count;
 	unsigned char* encode = nullptr;
-	const int err = ks_asm(ks, m_opcode.c_str(), 0, &encode, &size, &count);
+	const auto err = ks_asm(ks, m_opcode.c_str(), 0, &encode, &size, &count);
 
 	ks_close(ks);
 
