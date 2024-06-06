@@ -4,6 +4,7 @@ Convert your opcode into bytes and binary format.
 > [!NOTE] 
 > - It only works in x86 assembly.
 > - This project has only been tested on the Windows operating system.
+> - To build this project, you need to have CMake installed. You can install it <a href="https://cmake.org/download/">here</a>
 
 
 # How does this work?
