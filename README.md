@@ -38,4 +38,4 @@ git clone https://github.com/Z1KOx/Asm-Byte-Converter.git
 This will compile and link the executable, and it will provide you with the path where the executable file is located.
 
 > [!NOTE]
-> Ensure the keystone.dll is in the same directory before opening the .exe file.
+> Ensure the keystone.dll is in the same directory before opening the executable file.
