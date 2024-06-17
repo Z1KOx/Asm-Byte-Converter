@@ -35,7 +35,7 @@ git clone https://github.com/Z1KOx/Asm-Byte-Converter.git
 - If you don't have Git installed, you can download it <a href="https://git-scm.com/downloads">here</a>
 
 ### 2. Run build.bat
-This will compile and link the executable, and it will provide you with the path where the .exe file is located.
+This will compile and link the executable, and it will provide you with the path where the executable file is located.
 
 > [!NOTE]
 > Ensure the keystone.dll is in the same directory before opening the .exe file.
